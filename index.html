@@ -7,32 +7,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+        body {
             background-color: #121212;
-        }
-
-        #logo-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            z-index: 0;
-        }
-
-        .logo {
-            position: absolute;
-            width: 30px; /* Smaller logo size */
-            height: 30px; /* Smaller logo size */
-            user-select: none;
-            pointer-events: none;
-            opacity: 0.6; /* 60% transparency */
-            transition: transform 0.3s ease;
+            margin: 0;
+            font-family: 'Varela Round', sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full height for the body */
         }
 
         .container {
@@ -42,7 +24,6 @@
             justify-content: center;
             flex: 1; /* Allow the container to take available space */
             padding: 20px;
-            z-index: 1; /* Ensure content is above logos */
         }
 
         /* Header Text */
@@ -105,6 +86,16 @@
         .search-icon {
             width: 30px;
             height: 30px;
+        }
+
+        /* Text under URL input */
+        /* Removed, as text is moved to bottom footer */
+
+        /* Logo/Image */
+        .new-image {
+            width: 100px;
+            height: 100px;
+            margin: 20px 0;
         }
 
         /* Overlay Styles */
@@ -188,7 +179,6 @@
             background: #121212; /* Match the body background */
             user-select: none;
         }
-
         .footer-note {
             font-family: Arial, sans-serif;
             font-style: italic;
@@ -200,7 +190,6 @@
     </style>
 </head>
 <body>
-    <div id="logo-container"></div>
     <div class="container">
         <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" />
         <div class="text">Saffron</div>
@@ -211,6 +200,7 @@
             </button>
         </div>
     </div>
+
     <div class="overlay" id="overlay">
         <div class="prompt-box">
             <button class="close-button" onclick="closePrompt()">X</button>
@@ -226,57 +216,6 @@
     </footer>
 
     <script>
-        const container = document.getElementById('logo-container');
-        const logoSize = 30; // Smaller logo size in px
-        const padding = 20; // minimum spacing between logos in px
-
-        // Logo image URL
-        const logoSrc = "https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4";
-
-        function generateLogos() {
-            // clear existing
-            while (container.firstChild) {
-                container.removeChild(container.firstChild);
-            }
-
-            // Get container dimensions
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-
-            // Calculate spacing: cell size = logo size + padding
-            const cellSize = logoSize + padding;
-
-            // Calculate how many columns and rows fit
-            const columns = Math.floor(width / cellSize);
-            const rows = Math.floor(height / cellSize);
-
-            // Place one logo randomly inside each cell
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < columns; c++) {
-                    const logo = document.createElement('img');
-                    logo.src = logoSrc;
-                    logo.classList.add('logo');
-
-                    const xStart = c * cellSize;
-                    const yStart = r * cellSize;
-
-                    const maxOffsetX = cellSize - logoSize;
-                    const maxOffsetY = cellSize - logoSize;
-
-                    const offsetX = Math.random() * maxOffsetX;
-                    const offsetY = Math.random() * maxOffsetY;
-
-                    logo.style.left = xStart + offsetX + 'px';
-                    logo.style.top = yStart + offsetY + 'px';
-
-                    container.appendChild(logo);
-                }
-            }
-        }
-
-        window.addEventListener('resize', generateLogos);
-        window.addEventListener('load', generateLogos);
-
         function redirect() {
             var input = document.getElementById('url').value;
             var url;
@@ -323,3 +262,5 @@
     </script>
 </body>
 </html>
+
+
