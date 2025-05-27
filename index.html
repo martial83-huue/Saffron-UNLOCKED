@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Saffron</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
@@ -88,6 +88,9 @@
             height: 30px;
         }
 
+        /* Text under URL input */
+        /* Removed, as text is moved to bottom footer */
+
         /* Logo/Image */
         .new-image {
             width: 100px;
@@ -169,22 +172,31 @@
             color: #ff4c4c; /* Bright red */
             font-weight: bold;
             font-size: 1.2rem;
-            padding: 1rem 0;
+            padding: 1rem 0 0.25rem 0;
             position: relative;
             bottom: 0;
             width: 100%;
             background: #121212; /* Match the body background */
+            user-select: none;
+        }
+        .footer-note {
+            font-family: Arial, sans-serif;
+            font-style: italic;
+            font-size: 12px;
+            color: #fff;
+            margin: 0 0 1rem 0;
+            user-select: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo">
+        <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" />
         <div class="text">Saffron</div>
         <div class="input-container">
-            <input type="text" id="url" placeholder="Enter URL or Google Search">
+            <input type="text" id="url" placeholder="Enter URL or Google Search" />
             <button class="redirect-button" onclick="redirect()">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search Icon">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search Icon" />
             </button>
         </div>
     </div>
@@ -193,13 +205,14 @@
         <div class="prompt-box">
             <button class="close-button" onclick="closePrompt()">X</button>
             <p class="prompt-message" id="prompt-message"></p>
-            <input type="text" class="prompt-input" id="prompt-input">
+            <input type="text" class="prompt-input" id="prompt-input" />
             <button class="prompt-button" onclick="submitPrompt()">OK</button>
         </div>
     </div>
 
     <footer>
         Made by [SaffronA1]
+        <div class="footer-note">This was NOT made by Krounchdar Konda</div>
     </footer>
 
     <script>
@@ -227,12 +240,12 @@
             document.getElementById("overlay").style.display = "flex";
 
             return new Promise(resolve => {
-                submitPrompt = function() {
+                submitPrompt = function () {
                     var userInput = document.getElementById("prompt-input").value;
                     document.getElementById("overlay").style.display = "none";
                     resolve(userInput);
                     submitPrompt = null;
-                }
+                };
             });
         }
 
@@ -240,7 +253,7 @@
             document.getElementById("overlay").style.display = "none";
         }
 
-        document.getElementById('url').addEventListener('keydown', function(event) {
+        document.getElementById('url').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 redirect();
                 document.getElementById('url').blur();
@@ -249,3 +262,4 @@
     </script>
 </body>
 </html>
+
