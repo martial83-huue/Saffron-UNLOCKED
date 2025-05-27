@@ -7,269 +7,271 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
 
-    .container {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+body {
+  background-color: black;
+  margin: 0;
+  font-family: 'Varela Round', sans-serif;
+}
 
-    input#url, button.redirect-button {
-      font-family: 'Varela Round', sans-serif;
-      font-size: 50px;
-      border-radius: 20px;
-    }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
 
-    input#url {
-      width: 665px;
-      height: 150px;
-      background-color: black;
-      color: #ff6b6b;
-      outline: 10px solid #ff6b6b;
-      margin-bottom: 20px;
-    }
+/* Header Text */
+.text {
+  font-size: 100px;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-bottom: 20px;
+}
 
-    body {
-      background-color: black;
-      margin: 0;
-    }
+/* Input Field */
+input#url {
+  width: 665px;
+  height: 150px;
+  font-size: 50px;
+  background-color: black;
+  color: #ff6b6b;
+  border-radius: 20px;
+  outline: 10px solid #ff6b6b;
+  margin-bottom: 20px;
+}
 
-    button.redirect-button {
-      background-color: green;
-      border: none;
-      color: white;
-      padding: 10px;
-      width: 300px;
-      height: 150px;
-      outline: 10px solid darkgreen;
-      margin-bottom: 20px;
-    }
+/* Launch Button */
+button.redirect-button {
+  width: 300px;
+  height: 150px;
+  font-size: 50px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  outline: 10px solid darkgreen;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
 
-    button.redirect-button:hover {
-      filter: saturate(4);
-    }
+button.redirect-button:hover {
+  filter: saturate(4);
+}
 
-    .text {
-      font-family: 'Varela Round', sans-serif;
-      font-size: 100px;
-      font-weight: bold;
-      color: #ff6b6b;
-      margin-bottom: 20px;
-    }
+/* Logo/Image */
+.new-image {
+  width: 100px;
+  height: 100px;
+  margin: 20px 0;
+}
 
-    .new-image {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      width: 100px;
-      height: 100px;
-    }
+/* Toggle Bar */
+.toggle-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6b6b;
+  position: absolute;
+  top: calc(100% - 44px);
+  margin-bottom: 10px;
+}
 
-    .rectangle {
-      position: absolute;
-      bottom: 0;
-      width: calc(100% - 40px);
-      height: 150px;
-      background-color: darkgreen;
-      display: none;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-    }
+.bookmarks-text {
+  font-size: 20px;
+  margin-left: auto;
+}
 
-    .add-bookmark-button {
-      font-family: 'Varela Round', sans-serif;
-      font-size: 20px;
-      background-color: #ff6b6b;
-      border: none;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      width: 150px;
-      flex-shrink: 0;
-      position: relative;
-    }
+.toggle-button {
+  font-size: 20px;
+  background-color: #ff6b6b;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-left: auto;
+  cursor: pointer;
+}
 
-    .add-bookmark-button:hover {
-      background-color: #87CEEB;
-    }
+.toggle-button:hover {
+  background-color: #87CEEB;
+}
 
-    .bookmark-container {
-      display: flex;
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      margin-bottom: 10px;
-      max-height: 150px;
-      transition: max-height 0.5s ease;
-    }
+/* Bookmark Rectangle */
+.rectangle {
+  display: none;
+  width: calc(100% - 40px);
+  height: 150px;
+  background-color: darkgreen;
+  position: absolute;
+  bottom: 0;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .bookmark-button {
-      background-color: #ff6b6b;
-      border: none;
-      color: black;
-      font-family: 'Varela Round', sans-serif;
-      font-size: 20px;
-      padding: 10px 20px;
-      margin-right: 5px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+/* Bookmark Container */
+.bookmark-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+  max-height: 150px;
+  margin-bottom: 10px;
+  transition: max-height 0.5s ease;
+}
 
-    .bookmark-button:hover {
-      background-color: #87CEEB;
-    }
+/* Bookmark Button */
+.bookmark-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: black;
+  background-color: #ff6b6b;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-right: 5px;
+  cursor: pointer;
+  position: relative;
+}
 
-    .delete-button {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: transparent;
-      border: none;
-      color: red;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.bookmark-button:hover {
+  background-color: #87CEEB;
+}
 
-    .delete-button:hover {
-      color: darkred;
-    }
+.bookmark-button img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 5px;
+}
 
-    .toggle-bar {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #ff6b6b;
-      margin-bottom: 10px;
-      position: absolute;
-      top: calc(100% - 44px);
-    }
+.bookmark-button span {
+  white-space: nowrap;
+}
 
-    .toggle-button {
-      background-color: #ff6b6b;
-      border: none;
-      color: black;
-      font-family: 'Varela Round', sans-serif;
-      font-size: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-left: auto;
-    }
+/* Add Bookmark Button */
+.add-bookmark-button {
+  width: 150px;
+  font-size: 20px;
+  background-color: #ff6b6b;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
 
-    .toggle-button:hover {
-      background-color: #87CEEB;
-    }
+.add-bookmark-button:hover {
+  background-color: #87CEEB;
+}
 
-    .bookmarks-text {
-      font-family: 'Varela Round', sans-serif;
-      font-size: 20px;
-      margin-left: auto;
-    }
+/* Delete Button */
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: red;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 
-    .bookmark-button img {
-      width: 32px;
-      height: 32px;
-      margin-bottom: 5px;
-    }
+.delete-button:hover {
+  color: darkred;
+}
 
-    .bookmark-button span {
-      white-space: nowrap;
-    }
-
-    .overlay {
-    	position: fixed;
-    	top: 0;
-    	left: 0;
-    	width: 100%;
-    	height: 100%;
-    	background-color: rgba(0, 0, 0, 0.5);
-    	display: none;
-    	justify-content: center;
-    	align-items: center;
-	}
-
-	.prompt-box {
-   		background-color: #fff;
-    	padding: 20px;
-    	border-radius: 8px;
-   		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    	width: 300px;
-    	text-align: center;
-    	position: relative;
-	}
-
-    .prompt-message {
-        font-size: 24px;
-        font-family: 'Varela Round', sans-serif;
-        margin-bottom: 15px;
-        color: #333;
-    }
-
-    .prompt-input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-bottom: 15px;
-        box-sizing: border-box;
-        font-family: 'Varela Round', sans-serif;
-    }
-
-    .prompt-button {
-        padding: 8px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        font-family: 'Varela Round', sans-serif;
-    }
-
-    .prompt-button:hover {
-        background-color: #0056b3;
-    }
-    
-    .close-button {
-   	position: absolute;
-        top: 5px;
-        right: 5px;
-        background-color: transparent;
-        border: none;
-        color: #333;
-        font-size: 16px;
-        cursor: pointer;
-        z-index: 1;
-	}
-
-.close-button:hover {
-        color: #000;
-	}
-    
-    .edit-button {
-      position: absolute;
-      top: 20px;
-      right: 5px;
-      background-color: transparent;
-      border: none;
-      color: #a19100;
-      font-size: 13px;
-      cursor: pointer;
+/* Edit Button */
+.edit-button {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  font-size: 13px;
+  color: #a19100;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .edit-button:hover {
-    color: #524900;
+  color: #524900;
 }
 
+/* Prompt Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.prompt-box {
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prompt-message {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.prompt-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.prompt-button {
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.prompt-button:hover {
+  background-color: #0056b3;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  color: #333;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+/* Edit Overlay */
 .edit-overlay {
   position: fixed;
   top: 0;
@@ -283,11 +285,11 @@
 }
 
 .edit-options {
-  background-color: #fff;
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .edit-button-container {
@@ -297,7 +299,7 @@
 
 .edit-options button {
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
