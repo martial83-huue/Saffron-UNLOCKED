@@ -1,628 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saffron</title>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saffron</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
 
-body {
-  background-color: black;
-  margin: 0;
-  font-family: 'Varela Round', sans-serif;
-}
+        body {
+            background-color: #121212;
+            margin: 0;
+            font-family: 'Varela Round', sans-serif;
+            color: #ffffff;
+        }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  position: relative;
-}
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+            padding: 20px;
+        }
 
-/* Header Text */
-.text {
-  font-size: 100px;
-  font-weight: bold;
-  color: #ff6b6b;
-  margin-bottom: 20px;
-}
+        /* Header Text */
+        .text {
+            font-size: 80px;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-/* Input Field */
-input#url {
-  width: 665px;
-  height: 150px;
-  font-size: 50px;
-  background-color: black;
-  color: #ff6b6b;
-  border-radius: 20px;
-  outline: 10px solid #ff6b6b;
-  margin-bottom: 20px;
-}
+        /* Input Field */
+        input#url {
+            width: 80%;
+            max-width: 600px;
+            height: 60px;
+            font-size: 24px;
+            background-color: #1e1e1e;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+            border-radius: 30px;
+            padding: 10px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
 
-/* Launch Button */
-button.redirect-button {
-  width: 300px;
-  height: 150px;
-  font-size: 50px;
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  outline: 10px solid darkgreen;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
+        input#url:focus {
+            border-color: #87CEEB;
+            outline: none;
+        }
 
-button.redirect-button:hover {
-  filter: saturate(4);
-}
+        /* Launch Button */
+        button.redirect-button {
+            width: 300px;
+            height: 60px;
+            font-size: 24px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-/* Logo/Image */
-.new-image {
-  width: 100px;
-  height: 100px;
-  margin: 20px 0;
-}
+        button.redirect-button:hover {
+            background-color: #218838;
+        }
 
-/* Toggle Bar */
-.toggle-bar {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ff6b6b;
-  position: absolute;
-  top: calc(100% - 44px);
-  margin-bottom: 10px;
-}
+        /* Logo/Image */
+        .new-image {
+            width: 100px;
+            height: 100px;
+            margin: 20px 0;
+        }
 
-.bookmarks-text {
-  font-size: 20px;
-  margin-left: auto;
-}
+        /* Toggle Bar */
+        .toggle-bar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ff6b6b;
+            padding: 10px 20px;
+            border-radius: 20px;
+            position: absolute;
+            bottom: 20px;
+        }
 
-.toggle-button {
-  font-size: 20px;
-  background-color: #ff6b6b;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin-left: auto;
-  cursor: pointer;
-}
+        .bookmarks-text {
+            font-size: 20px;
+        }
 
-.toggle-button:hover {
-  background-color: #87CEEB;
-}
+        .toggle-button {
+            font-size: 20px;
+            background-color: #ff6b6b;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
 
-/* Bookmark Rectangle */
-.rectangle {
-  display: none;
-  width: calc(100% - 40px);
-  height: 150px;
-  background-color: darkgreen;
-  position: absolute;
-  bottom: 0;
-  padding: 0 20px;
-  align-items: center;
-  justify-content: space-between;
-}
+        .toggle-button:hover {
+            background-color: #87CEEB;
+        }
 
-/* Bookmark Container */
-.bookmark-container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  overflow-x: auto;
-  max-height: 150px;
-  margin-bottom: 10px;
-  transition: max-height 0.5s ease;
-}
+        /* Bookmark Rectangle */
+        .rectangle {
+            display: none;
+            width: calc(100% - 40px);
+            background-color: #1e1e1e;
+            position: absolute;
+            bottom: 80px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-/* Bookmark Button */
-.bookmark-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: black;
-  background-color: #ff6b6b;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin-right: 5px;
-  cursor: pointer;
-  position: relative;
-}
+        /* Bookmark Container */
+        .bookmark-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            overflow-x: auto;
+            max-height: 150px;
+            margin-bottom: 10px;
+            transition: max-height 0.5s ease;
+        }
 
-.bookmark-button:hover {
-  background-color: #87CEEB;
-}
+        /* Bookmark Button */
+        .bookmark-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: black;
+            background-color: #ff6b6b;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s;
+        }
 
-.bookmark-button img {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 5px;
-}
+        .bookmark-button:hover {
+            background-color: #87CEEB;
+        }
 
-.bookmark-button span {
-  white-space: nowrap;
-}
+        .bookmark-button img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 5px;
+        }
 
-/* Add Bookmark Button */
-.add-bookmark-button {
-  width: 150px;
-  font-size: 20px;
-  background-color: #ff6b6b;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
+        .bookmark-button span {
+            white-space: nowrap;
+        }
 
-.add-bookmark-button:hover {
-  background-color: #87CEEB;
-}
+        /* Add Bookmark Button */
+        .add-bookmark-button {
+            width: 150px;
+            font-size: 16px;
+            background-color: #ff6b6b;
+            color: black;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-/* Delete Button */
-.delete-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  color: red;
-  font-size: 16px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
+        .add-bookmark-button:hover {
+            background-color: #87CEEB;
+        }
 
-.delete-button:hover {
-  color: darkred;
-}
+        /* Overlay Styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
 
-/* Edit Button */
-.edit-button {
-  position: absolute;
-  top: 20px;
-  right: 5px;
-  font-size: 13px;
-  color: #a19100;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
+        .prompt-box {
+            width: 300px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.edit-button:hover {
-  color: #524900;
-}
+        .prompt-message {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
 
-/* Prompt Overlay */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
+        .prompt-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
 
-.prompt-box {
-  width: 300px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        .prompt-button {
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.prompt-message {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #333;
-}
+        .prompt-button:hover {
+            background-color: #0056b3;
+        }
 
-.prompt-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-}
+        /* Close Button */
+        .close-button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: transparent;
+            color: #333;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
 
-.prompt-button {
-  padding: 8px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+        .close-button:hover {
+            color: #000;
+        }
 
-.prompt-button:hover {
-  background-color: #0056b3;
-}
-
-/* Close Button */
-.close-button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: transparent;
-  color: #333;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.close-button:hover {
-  color: #000;
-}
-
-/* Edit Overlay */
-.edit-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.edit-options {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.edit-button-container {
-  display: flex;
-  justify-content: space-around;
-}
-
-.edit-options button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 5px;
-}
-
-.edit-options button:hover {
-  background-color: #0069d9;
-}
-
-
-</style>
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image">
-    <div class="text">Saffron</div>
-    <input type="text" id="url" placeholder="Enter URL or Google Search">
-	  <br>
-    <button class="redirect-button" onclick="redirect()">Launch</button>
-    
-    <div class="toggle-bar">
-      <div class="bookmarks-text">Bookmarks</div>
-      <div class="toggle-button" onclick="toggleBookmarkBar()">+</div>
+    <div class="container">
+        <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo">
+        <div class="text">Saffron</div>
+        <input type="text" id="url" placeholder="Enter URL or Google Search">
+        <button class="redirect-button" onclick="redirect()">Launch</button>
+        
+        <div class="toggle-bar">
+            <div class="bookmarks-text">Bookmarks</div>
+            <div class="toggle-button" onclick="toggleBookmarkBar()">+</div>
+        </div>
+        <div class="rectangle">
+            <div class="bookmark-container" id="bookmarkButtons"></div>
+            <button class="add-bookmark-button" onclick="addBookmark()">Save as Bookmark</button>
+        </div>
     </div>
-    <div class="rectangle">
-      <div class="bookmark-container" id="bookmarkButtons"></div>
-      <button class="add-bookmark-button" onclick="addBookmark()">Save as Bookmark</button>
+
+    <div class="overlay" id="overlay">
+        <div class="prompt-box">
+            <button class="close-button" onclick="closePrompt()">X</button>
+            <p class="prompt-message" id="prompt-message"></p>
+            <input type="text" class="prompt-input" id="prompt-input">
+            <button class="prompt-button" onclick="submitPrompt()">OK</button>
+        </div>
     </div>
-  </div>
 
-  <div class="overlay" id="overlay">
-    <div class="prompt-box">
-        <button class="close-button" onclick="closePrompt()">X</button>
-        <p class="prompt-message" id="prompt-message"></p>
-        <input type="text" class="prompt-input" id="prompt-input">
-        <button class="prompt-button" onclick="submitPrompt()">OK</button>
-    </div>
-  </div>
-
-  <script>
-    var bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
-    renderBookmarkButtons();
-
-    function redirect() {
-      var input = document.getElementById('url').value;
-      var url;
-
-      if (isValidURL(input)) {
-        if (!input.startsWith('http') && !input.startsWith('https')) {
-          url = 'https://' + input;
-        } else {
-          url = input;
-        }
-      } else {
-        url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
-      }
-      
-        var isShiftPressed = event.shiftKey;
-        if (isShiftPressed) {
-            window.location.href = url;
-	    setTimeout(function() {
-       	      window.location.href = url + "/?";
-	    }, 500);
-            return;
-        }
-
-        var iframe = document.createElement('iframe');
-        iframe.src = 'loading.html';
-        iframe.style.position = 'fixed';
-        iframe.style.top = '0';
-        iframe.style.left = '0';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = 'none';
-        document.body.appendChild(iframe);
-	    
-        var blobbypass = window.open('loading.html');
-        setTimeout(function() {
-            var windowOpenValue = blobbypass || "Blocked";
-  	    if (windowOpenValue === "Blocked" || !blobbypass || blobbypass.closed || typeof blobbypass.closed === "undefined") {
-		window.location.href = url;
-            } else {
-                blobbypass.location.href = url;
-		setTimeout(function() {
-		   document.body.removeChild(iframe);
-	        }, 500);
-            }
-        }, 1000);
-    }
-
-   function isValidURL(str) {
-	const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
-	return pattern.test(str);
-    }
-
-    async function customPrompt(message, defaultValue) {
-      document.getElementById("prompt-message").innerText = message;
-      document.getElementById("prompt-input").value = defaultValue || "";
-      document.getElementById("overlay").style.display = "flex";
-
-      return new Promise(resolve => {
-        submitPrompt = function() {
-          var userInput = document.getElementById("prompt-input").value;
-          document.getElementById("overlay").style.display = "none";
-          resolve(userInput);
-          submitPrompt = null;
-        }
-      });
-    }
-
-    function addBookmark() {
-      var input = document.getElementById('url').value; 
-      customPrompt("Enter bookmark name:").then(function(bookmarkName) {
-        if (!bookmarkName) return;
-
-        if (!isValidURL(input)) {
-          bookmarks.push({ name: bookmarkName, url: 'https://www.google.com/search?q=' + encodeURIComponent(input) });
-          renderBookmarkButtons();
-          saveBookmarks();
-          return;
-        }
-
-        if (!input.startsWith('http') && !input.startsWith('https')) {
-          input = 'https://' + input;
-        }
-
-        bookmarks.push({ name: bookmarkName, url: input });
+    <script>
+        var bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
         renderBookmarkButtons();
-        saveBookmarks();
-      });
-    }
 
-    function renderBookmarkButtons() {
-      var container = document.getElementById('bookmarkButtons');
-      container.innerHTML = '';
+        function redirect() {
+            var input = document.getElementById('url').value;
+            var url;
 
-      bookmarks.forEach(function(bookmark) {
-        var button = document.createElement('button');
-        button.className = 'bookmark-button';
-        var faviconURL = getFaviconURL(bookmark.url);
-        if (faviconURL) {
-          var faviconImg = document.createElement('img');
-          faviconImg.src = faviconURL;
-          faviconImg.alt = "Favicon";
-          button.appendChild(faviconImg);
-        }
-        var urlSpan = document.createElement('span');
-        urlSpan.textContent = bookmark.name;
-        button.appendChild(urlSpan);
-
-        var deleteButton = document.createElement('button');
-        deleteButton.className = 'delete-button';
-        deleteButton.textContent = 'X';
-        deleteButton.onclick = function(event) {
-          event.stopPropagation();
-          deleteBookmark(bookmark);
-        };
-        button.appendChild(deleteButton);
-
-	var editButton = document.createElement('button');
-   	editButton.className = 'edit-button';
-   	editButton.textContent = '🖉';
-    	editButton.onclick = function(event) {
-        event.stopPropagation();
-        editBookmark(bookmark);
-    	};
-   	button.appendChild(editButton);
-    
-        button.onclick = function() {
-        
-        var isShiftPressed = event.shiftKey;
-        if (isShiftPressed) {
-           window.location.href = bookmark.url;
-	    setTimeout(function() {
-       	      window.location.href = bookmark.url + "/?";
-	    }, 500);
-            return;
-        }
-        
-	var iframe = document.createElement('iframe');
-        iframe.src = 'loading.html';
-        iframe.style.position = 'fixed';
-        iframe.style.top = '0';
-        iframe.style.left = '0';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = 'none';
-	document.body.appendChild(iframe);
-        var blobbypass = window.open('loading.html');
-        setTimeout(function() {
-            var windowOpenValue = blobbypass || "Blocked";
-  	    if (windowOpenValue === "Blocked" || !blobbypass || blobbypass.closed || typeof blobbypass.closed === "undefined") {
-            	window.location.href = bookmark.url;
+            if (isValidURL(input)) {
+                url = input.startsWith('http') ? input : 'https://' + input;
             } else {
-                blobbypass.location.href = bookmark.url;
-		setTimeout(function() {
-		   document.body.removeChild(iframe);
-	        }, 500);
+                url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
             }
-         }, 1000);
-        };
-        container.appendChild(button);
-      });
-    }
 
-    function deleteBookmark(bookmark) {
-      bookmarks = bookmarks.filter(function(item) {
-        return item !== bookmark;
-      });
-      renderBookmarkButtons();
-      saveBookmarks();
-    }
-    
-   function editBookmarkName(bookmark) {
-  customPrompt("Enter new name for bookmark:", bookmark.name)
-    .then(function (newName) {
-      if (!newName) return;
+            window.location.href = url;
+        }
 
-      bookmark.name = newName;
-      renderBookmarkButtons();
-      saveBookmarks();
-    });
-}
+        function isValidURL(str) {
+            const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
+            return pattern.test(str);
+        }
 
-function editBookmarkUrl(bookmark) {
-  customPrompt("Enter new URL for bookmark:", bookmark.url)
-    .then(function (newUrl) {
-      if (!newUrl) return;
+        async function customPrompt(message, defaultValue) {
+            document.getElementById("prompt-message").innerText = message;
+            document.getElementById("prompt-input").value = defaultValue || "";
+            document.getElementById("overlay").style.display = "flex";
 
-      if (!isValidURL(newUrl)) {
-        bookmark.url = 'https://www.google.com/search?q=' + encodeURIComponent(newUrl);
-          renderBookmarkButtons();
-          saveBookmarks();
-          return;
-      }
+            return new Promise(resolve => {
+                submitPrompt = function() {
+                    var userInput = document.getElementById("prompt-input").value;
+                    document.getElementById("overlay").style.display = "none";
+                    resolve(userInput);
+                    submitPrompt = null;
+                }
+            });
+        }
 
-      if (!newUrl.startsWith("http") && !newUrl.startsWith("https")) {
-        newUrl = "https://" + newUrl;
-      }
+        function addBookmark() {
+            var input = document.getElementById('url').value; 
+            customPrompt("Enter bookmark name:").then(function(bookmarkName) {
+                if (!bookmarkName) return;
 
-      bookmark.url = newUrl;
-      renderBookmarkButtons();
-      saveBookmarks();
-    });
-}
-    
-function editBookmark(bookmark) {
+                if (!isValidURL(input)) {
+                    bookmarks.push({ name: bookmarkName, url: 'https://www.google.com/search?q=' + encodeURIComponent(input) });
+                } else {
+                    bookmarks.push({ name: bookmarkName, url: input.startsWith('http') ? input : 'https://' + input });
+                }
+                renderBookmarkButtons();
+                saveBookmarks();
+            });
+        }
 
-var overlay = document.createElement('div');
-  overlay.classList.add('edit-overlay');
-  var editOptions = document.createElement('div');
-  editOptions.classList.add('edit-options');
-  editOptions.style.position = 'relative';
+        function renderBookmarkButtons() {
+            var container = document.getElementById('bookmarkButtons');
+            container.innerHTML = '';
 
-  var editNameButton = document.createElement('button');
-  editNameButton.textContent = "Edit Name";
-  editNameButton.onclick = function() {
-    editBookmarkName(bookmark);
-    document.body.removeChild(overlay);
-  };
-  editOptions.appendChild(editNameButton);
+            bookmarks.forEach(function(bookmark) {
+                var button = document.createElement('button');
+                button.className = 'bookmark-button';
+                var faviconURL = getFaviconURL(bookmark.url);
+                if (faviconURL) {
+                    var faviconImg = document.createElement('img');
+                    faviconImg.src = faviconURL;
+                    faviconImg.alt = "Favicon";
+                    button.appendChild(faviconImg);
+                }
+                var urlSpan = document.createElement('span');
+                urlSpan.textContent = bookmark.name;
+                button.appendChild(urlSpan);
 
-  var editUrlButton = document.createElement('button');
-  editUrlButton.textContent = "Edit URL";
-  editUrlButton.onclick = function() {
-    editBookmarkUrl(bookmark);
-    document.body.removeChild(overlay);
-  };
-  editOptions.appendChild(editUrlButton);
+                var deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'X';
+                deleteButton.onclick = function(event) {
+                    event.stopPropagation();
+                    deleteBookmark(bookmark);
+                };
+                button.appendChild(deleteButton);
 
-  var closeButton = document.createElement('button');
-  closeButton.textContent = "X";
-  closeButton.classList.add('close-button');
-  closeButton.style.top = 'calc(50% - 36px)';
-  closeButton.style.right = 'calc(50% - 116px)';
-  closeButton.onclick = function() {
-    document.body.removeChild(overlay);
-  };
-  overlay.appendChild(closeButton);
+                button.onclick = function() {
+                    window.location.href = bookmark.url;
+                };
+                container.appendChild(button);
+            });
+        }
 
-  document.body.appendChild(editOptions);
-  
-  overlay.appendChild(editOptions);
+        function deleteBookmark(bookmark) {
+            bookmarks = bookmarks.filter(function(item) {
+                return item !== bookmark;
+            });
+            renderBookmarkButtons();
+            saveBookmarks();
+        }
 
-  document.body.appendChild(overlay);
-}
+        function getFaviconURL(url) {
+            return 'https://www.google.com/s2/favicons?sz=64&domain=' + encodeURIComponent(url);
+        }
 
-    function getFaviconURL(url) {
-      return 'https://www.google.com/s2/favicons?sz=64&domain=' + encodeURIComponent(url);
-    }
+        function toggleBookmarkBar() {
+            var bar = document.querySelector('.rectangle');
+            bar.style.display = bar.style.display === 'none' || bar.style.display === '' ? 'flex' : 'none';
+        }
 
-    function toggleBookmarkBar() {
-      var bar = document.querySelector('.rectangle');
-      var toggleButton = document.querySelector('.toggle-button');
-      var toggleBar = document.querySelector('.toggle-bar');
+        function saveBookmarks() {
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+        }
 
-      if (bar.style.display === 'none' || bar.style.display === '') {
-        bar.style.display = 'flex';
-        toggleButton.textContent = '-';
-        toggleBar.style.top = 'calc(100% - 194px)';
-      } else {
-        bar.style.display = 'none';
-        toggleButton.textContent = '+';
-        toggleBar.style.top = 'calc(100% - 44px)';
-      }
-    }
+        function closePrompt() {
+            document.getElementById("overlay").style.display = "none";
+        }
 
-    function saveBookmarks() {
-      localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    }
-    
-    function closePrompt() {
-   	  document.getElementById("overlay").style.display = "none";
-	}
-
-    document.getElementById('url').addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-        redirect(event);
-	document.getElementById('url').blur();
-      }
-    });
-  </script>
+        document.getElementById('url').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                redirect();
+                document.getElementById('url').blur();
+            }
+        });
+    </script>
 </body>
 </html>
