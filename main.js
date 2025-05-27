@@ -1,1 +1,1 @@
-window.location.href = "https://SaffronA1.github.io/saffron1/index.html";
+window.location.href = "https://SaffronA1.github.io/Saffron/index.html";
