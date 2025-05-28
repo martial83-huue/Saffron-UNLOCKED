@@ -14,7 +14,41 @@
             color: #ffffff;
             display: flex;
             flex-direction: column;
-            height: 100vh; /* Full height for the body */
+            height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .white-theme {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .white-theme input#url {
+            background-color: #f0f0f0;
+            color: #000000;
+            border-color: #000000;
+        }
+
+        .white-theme input#url:focus {
+            border-color: #87CEEB;
+        }
+
+        .white-theme button.redirect-button {
+            background-color: #000000;
+            color: white;
+        }
+
+        .white-theme button.redirect-button:hover {
+            background-color: #333333;
+        }
+
+        .white-theme footer {
+            background-color: #ffffff;
+            color: #cc0000;
+        }
+
+        .white-theme .footer-note {
+            color: #000000;
         }
 
         .container {
@@ -22,11 +56,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex: 1; /* Allow the container to take available space */
+            flex: 1;
             padding: 20px;
         }
 
-        /* Header Text */
         .text {
             font-size: 60px;
             font-weight: bold;
@@ -35,18 +68,16 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Input Field and Button Container */
         .input-container {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
             width: 100%;
-            max-width: 800px; /* Adjusted max-width for responsiveness */
+            max-width: 800px;
         }
 
-        /* Input Field */
         input#url {
-            flex: 1; /* Allow input to take available space */
+            flex: 1;
             height: 60px;
             font-size: 24px;
             background-color: #1e1e1e;
@@ -62,43 +93,36 @@
             outline: none;
         }
 
-        /* Launch Button */
         button.redirect-button {
-            height: 60px; /* Match the height of the input field */
-            width: 60px; /* Fixed width for the icon button */
-            background-color: #ff6b6b; /* Red color for the Launch button */
+            height: 60px;
+            width: 60px;
+            background-color: #ff6b6b;
             color: white;
             border: none;
-            border-radius: 0 30px 30px 0; /* Match corner rounding */
+            border-radius: 0 30px 30px 0;
             cursor: pointer;
-            padding: 0; /* No padding for icon button */
+            padding: 0;
             transition: background-color 0.3s;
-            display: flex; /* Center the icon */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         button.redirect-button:hover {
-            background-color: #e55a5a; /* Darker red on hover */
+            background-color: #e55a5a;
         }
 
-        /* Search Icon */
         .search-icon {
             width: 30px;
             height: 30px;
         }
 
-        /* Text under URL input */
-        /* Removed, as text is moved to bottom footer */
-
-        /* Logo/Image */
         .new-image {
             width: 100px;
             height: 100px;
             margin: 20px 0;
         }
 
-        /* Overlay Styles */
         .overlay {
             position: fixed;
             top: 0;
@@ -149,7 +173,6 @@
             background-color: #0056b3;
         }
 
-        /* Close Button */
         .close-button {
             position: absolute;
             top: 5px;
@@ -166,19 +189,19 @@
             color: #000;
         }
 
-        /* Footer Styles */
         footer {
             text-align: center;
-            color: #ff4c4c; /* Bright red */
+            color: #ff4c4c;
             font-weight: bold;
             font-size: 1.2rem;
             padding: 1rem 0 0.25rem 0;
             position: relative;
             bottom: 0;
             width: 100%;
-            background: #121212; /* Match the body background */
+            background: #121212;
             user-select: none;
         }
+
         .footer-note {
             font-family: Arial, sans-serif;
             font-style: italic;
@@ -187,9 +210,104 @@
             margin: 0 0 1rem 0;
             user-select: none;
         }
+
+        /* SETTINGS DROPDOWN */
+        .settings-wrapper {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        .settings-button {
+            background: #1e1e1e;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .settings-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: #1e1e1e;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 10px;
+            min-width: 120px;
+            z-index: 1000;
+        }
+
+        .settings-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .theme-selector {
+            position: relative;
+            color: #ff6b6b;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .theme-options {
+            position: absolute;
+            top: 0;
+            left: -130px;
+            display: flex;
+            flex-direction: column;
+            background-color: #1e1e1e;
+            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .theme-options button {
+            background-color: transparent;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            margin: 5px 0;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .theme-options button:hover {
+            color: #ffffff;
+        }
+
+        .settings-dropdown:hover .theme-options {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <!-- Settings Menu -->
+    <div class="settings-wrapper">
+        <div class="settings-dropdown">
+            <button class="settings-button">⚙️</button>
+            <div class="dropdown-content">
+                <div class="theme-selector">
+                    Theme
+                    <div class="theme-options">
+                        <button onclick="setTheme('dark')">Dark</button>
+                        <button onclick="setTheme('light')">Light</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <div class="container">
         <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" />
         <div class="text">Saffron</div>
@@ -259,6 +377,14 @@
                 document.getElementById('url').blur();
             }
         });
+
+        function setTheme(mode) {
+            if (mode === 'light') {
+                document.body.classList.add('white-theme');
+            } else {
+                document.body.classList.remove('white-theme');
+            }
+        }
     </script>
 </body>
 </html>
