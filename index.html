@@ -6,7 +6,6 @@
     <title>Saffron</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
-
         body {
             background-color: #121212;
             margin: 0;
@@ -16,7 +15,6 @@
             flex-direction: column;
             height: 100vh; /* Full height for the body */
         }
-
         .container {
             display: flex;
             flex-direction: column;
@@ -25,7 +23,6 @@
             flex: 1; /* Allow the container to take available space */
             padding: 20px;
         }
-
         /* Header Text */
         .text {
             font-size: 60px;
@@ -34,233 +31,250 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-
         /* Input Field and Button Container */
         .input-container {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 800px; /* Adjusted max-width for responsiveness */
-        }
 
-        /* Input Field */
-        input#url {
-            flex: 1; /* Allow input to take available space */
-            height: 60px;
-            font-size: 24px;
-            background-color: #1e1e1e;
-            color: #ff6b6b;
-            border: 2px solid #ff6b6b;
-            border-radius: 30px 0 0 30px;
-            padding: 10px;
-            transition: border-color 0.3s;
-        }
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>Saffron</title> <style> @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
+    body {
+        background-color: #121212;
+        margin: 0;
+        font-family: 'Varela Round', sans-serif;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        height: 100vh; /* Full height for the body */
+    }
 
-        input#url:focus {
-            border-color: #87CEEB;
-            outline: none;
-        }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1; /* Allow the container to take available space */
+        padding: 20px;
+    }
 
-        /* Launch Button */
-        button.redirect-button {
-            height: 60px; /* Match the height of the input field */
-            width: 60px; /* Fixed width for the icon button */
-            background-color: #ff6b6b; /* Red color for the Launch button */
-            color: white;
-            border: none;
-            border-radius: 0 30px 30px 0; /* Match corner rounding */
-            cursor: pointer;
-            padding: 0; /* No padding for icon button */
-            transition: background-color 0.3s;
-            display: flex; /* Center the icon */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-        }
+    /* Header Text */
+    .text {
+        font-size: 60px;
+        font-weight: bold;
+        color: #ff6b6b;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-        button.redirect-button:hover {
-            background-color: #e55a5a; /* Darker red on hover */
-        }
+    /* Input Field and Button Container */
+    .input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        max-width: 800px; /* Adjusted max-width for responsiveness */
+    }
 
-        /* Search Icon */
-        .search-icon {
-            width: 30px;
-            height: 30px;
-        }
+    /* Input Field */
+    input#url {
+        flex: 1; /* Allow input to take available space */
+        height: 60px;
+        font-size: 24px;
+        background-color: #1e1e1e;
+        color: #ff6b6b;
+        border: 2px solid #ff6b6b;
+        border-radius: 30px 0 0 30px;
+        padding: 10px;
+        transition: border-color 0.3s;
+    }
 
-        /* Text under URL input */
-        /* Removed, as text is moved to bottom footer */
+    input#url:focus {
+        border-color: #87CEEB;
+        outline: none;
+    }
 
-        /* Logo/Image */
-        .new-image {
-            width: 100px;
-            height: 100px;
-            margin: 20px 0;
-        }
+    /* Launch Button */
+    button.redirect-button {
+        height: 60px; /* Match the height of the input field */
+        width: 60px; /* Fixed width for the icon button */
+        background-color: #ff6b6b; /* Red color for the Launch button */
+        color: white;
+        border: none;
+        border-radius: 0 30px 30px 0; /* Match corner rounding */
+        cursor: pointer;
+        padding: 0; /* No padding for icon button */
+        transition: background-color 0.3s;
+        display: flex; /* Center the icon */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+    }
 
-        /* Overlay Styles */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
+    button.redirect-button:hover {
+        background-color: #e55a5a; /* Darker red on hover */
+    }
 
-        .prompt-box {
-            width: 300px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    /* Search Icon */
+    .search-icon {
+        width: 30px;
+        height: 30px;
+    }
 
-        .prompt-message {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
+    /* Text under URL input */
+    /* Removed, as text is moved to bottom footer */
 
-        .prompt-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
+    /* Logo/Image */
+    .new-image {
+        width: 100px;
+        height: 100px;
+        margin: 20px 0;
+    }
 
-        .prompt-button {
-            padding: 8px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    /* Overlay Styles */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .prompt-button:hover {
-            background-color: #0056b3;
-        }
+    .prompt-box {
+        width: 300px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        /* Close Button */
-        .close-button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: transparent;
-            color: #333;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            z-index: 1;
-        }
+    .prompt-message {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #333;
+    }
 
-        .close-button:hover {
-            color: #000;
-        }
+    .prompt-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
 
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            color: #ff4c4c; /* Bright red */
-            font-weight: bold;
-            font-size: 1.2rem;
-            padding: 1rem 0 0.25rem 0;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            background: #121212; /* Match the body background */
-            user-select: none;
-        }
-        .footer-note {
-            font-family: Arial, sans-serif;
-            font-style: italic;
-            font-size: 12px;
-            color: #fff;
-            margin: 0 0 1rem 0;
-            user-select: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" />
-        <div class="text">Saffron</div>
-        <div class="input-container">
-            <input type="text" id="url" placeholder="Enter URL or Google Search" />
-            <button class="redirect-button" onclick="redirect()">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search Icon" />
-            </button>
-        </div>
+    .prompt-button {
+        padding: 8px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .prompt-button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Close Button */
+    .close-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: transparent;
+        color: #333;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .close-button:hover {
+        color: #000;
+    }
+
+    /* Footer Styles */
+    footer {
+        text-align: center;
+        color: #ff4c4c; /* Bright red */
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 1rem 0 0.25rem 0;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background: #121212; /* Match the body background */
+        user-select: none;
+    }
+    .footer-note {
+        font-family: Arial, sans-serif;
+        font-style: italic;
+        font-size: 12px;
+        color: #fff;
+        margin: 0 0 1rem 0;
+        user-select: none;
+    }
+</style>
+</head> <body> <div class="container"> <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" /> <div class="text">Saffron</div> <div class="input-container"> <input type="text" id="url" placeholder="Enter URL or Google Search" /> <button class="redirect-button" onclick="redirect()"> <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search Icon" /> </button> </div> </div>
+<div class="overlay" id="overlay">
+    <div class="prompt-box">
+        <button class="close-button" onclick="closePrompt()">X</button>
+        <p class="prompt-message" id="prompt-message"></p>
+        <input type="text" class="prompt-input" id="prompt-input" />
+        <button class="prompt-button" onclick="submitPrompt()">OK</button>
     </div>
+</div>
 
-    <div class="overlay" id="overlay">
-        <div class="prompt-box">
-            <button class="close-button" onclick="closePrompt()">X</button>
-            <p class="prompt-message" id="prompt-message"></p>
-            <input type="text" class="prompt-input" id="prompt-input" />
-            <button class="prompt-button" onclick="submitPrompt()">OK</button>
-        </div>
-    </div>
+<footer>
+    Made by [SaffronA1]
+    <div class="footer-note">This was NOT made by Krounchdhar Konda</div>
+</footer>
 
-    <footer>
-        Made by [SaffronA1]
-        <div class="footer-note">This was NOT made by Krounchdhar Konda</div>
-    </footer>
+<script>
+    function redirect() {
+        var input = document.getElementById('url').value;
+        var url;
 
-    <script>
-        function redirect() {
-            var input = document.getElementById('url').value;
-            var url;
-
-            if (isValidURL(input)) {
-                url = input.startsWith('http') ? input : 'https://' + input;
-            } else {
-                url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
-            }
-
-            window.location.href = url;
+        if (isValidURL(input)) {
+            url = input.startsWith('http') ? input : 'https://' + input;
+        } else {
+            url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
         }
 
-        function isValidURL(str) {
-            const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
-            return pattern.test(str);
-        }
+        window.location.href = url;
+    }
 
-        async function customPrompt(message, defaultValue) {
-            document.getElementById("prompt-message").innerText = message;
-            document.getElementById("prompt-input").value = defaultValue || "";
-            document.getElementById("overlay").style.display = "flex";
+    function isValidURL(str) {
+        const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
+        return pattern.test(str);
+    }
 
-            return new Promise(resolve => {
-                submitPrompt = function () {
-                    var userInput = document.getElementById("prompt-input").value;
-                    document.getElementById("overlay").style.display = "none";
-                    resolve(userInput);
-                    submitPrompt = null;
-                };
-            });
-        }
+    async function customPrompt(message, defaultValue) {
+        document.getElementById("prompt-message").innerText = message;
+        document.getElementById("prompt-input").value = defaultValue || "";
+        document.getElementById("overlay").style.display = "flex";
 
-        function closePrompt() {
-            document.getElementById("overlay").style.display = "none";
-        }
-
-        document.getElementById('url').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                redirect();
-                document.getElementById('url').blur();
-            }
+        return new Promise(resolve => {
+            submitPrompt = function () {
+                var userInput = document.getElementById("prompt-input").value;
+                document.getElementById("overlay").style.display = "none";
+                resolve(userInput);
+                submitPrompt = null;
+            };
         });
-    </script>
-</body>
-</html>
+    }
 
+    function closePrompt() {
+        document.getElementById("overlay").style.display = "none";
+    }
 
+    document.getElementById('url').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            redirect();
+            document.getElementById('url').blur();
+        }
+    });
+</script>
