@@ -322,10 +322,33 @@
 
   <footer>
     Made by [SaffronA1]
-    <div class="footer-note">This was NOT made by Krounchdhar Konda</div>
+    <div class="footer-note">Updates: Light and Dark Theme Modes</div>
   </footer>
 
   <script>
+    // Helper: set cookie (expires in 365 days)
+    function setCookie(name, value, days = 365) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires="+ d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Helper: get cookie by name
+    function getCookie(name) {
+      const cname = name + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(cname) === 0) {
+          return c.substring(cname.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    // Redirect function as before
     function redirect() {
       var input = document.getElementById('url').value;
       var url;
@@ -342,6 +365,7 @@
       return pattern.test(str);
     }
 
+    // Prompt related code unchanged
     async function customPrompt(message, defaultValue) {
       document.getElementById("prompt-message").innerText = message;
       document.getElementById("prompt-input").value = defaultValue || "";
@@ -361,14 +385,28 @@
       document.getElementById("overlay").style.display = "none";
     }
 
+    // Set theme and save to cookie
     function setTheme(theme) {
       if (theme === 'light') {
         document.body.classList.add('light-theme');
       } else {
         document.body.classList.remove('light-theme');
       }
+      setCookie('theme', theme, 365);
     }
 
+    // On page load: check cookie, set theme accordingly
+    window.onload = function() {
+      const savedTheme = getCookie('theme');
+      if (savedTheme === 'light') {
+        setTheme('light');
+      } else {
+        // Default is dark
+        setTheme('dark');
+      }
+    }
+
+    // Enter key triggers redirect
     document.getElementById('url').addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         redirect();
