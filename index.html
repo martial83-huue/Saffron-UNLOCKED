@@ -1,390 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Saffron</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saffron</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
 
-        body {
-            background-color: #121212;
-            margin: 0;
-            font-family: 'Varela Round', sans-serif;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            transition: all 0.3s ease;
-        }
+    :root {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --accent-color: #ff6b6b;
+      --input-bg: #1e1e1e;
+      --footer-text: #ff4c4c;
+    }
 
-        .white-theme {
-            background-color: #ffffff;
-            color: #000000;
-        }
+    .light-theme {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --input-bg: #f0f0f0;
+      --footer-text: #cc0000;
+    }
 
-        .white-theme input#url {
-            background-color: #f0f0f0;
-            color: #000000;
-            border-color: #000000;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      font-family: 'Varela Round', sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
 
-        .white-theme input#url:focus {
-            border-color: #87CEEB;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+    }
 
-        .white-theme button.redirect-button {
-            background-color: #000000;
-            color: white;
-        }
+    .text {
+      font-size: 60px;
+      font-weight: bold;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-        .white-theme button.redirect-button:hover {
-            background-color: #333333;
-        }
+    .input-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 800px;
+    }
 
-        .white-theme footer {
-            background-color: #ffffff;
-            color: #cc0000;
-        }
+    input#url {
+      flex: 1;
+      height: 60px;
+      font-size: 24px;
+      background-color: var(--input-bg);
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 30px 0 0 30px;
+      padding: 10px;
+      transition: border-color 0.3s;
+    }
 
-        .white-theme .footer-note {
-            color: #000000;
-        }
+    input#url:focus {
+      border-color: #87CEEB;
+      outline: none;
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            padding: 20px;
-        }
+    button.redirect-button {
+      height: 60px;
+      width: 60px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      padding: 0;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .text {
-            font-size: 60px;
-            font-weight: bold;
-            color: #ff6b6b;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+    button.redirect-button:hover {
+      background-color: #e55a5a;
+    }
 
-        .input-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
+    .search-icon {
+      width: 30px;
+      height: 30px;
+    }
 
-        input#url {
-            flex: 1;
-            height: 60px;
-            font-size: 24px;
-            background-color: #1e1e1e;
-            color: #ff6b6b;
-            border: 2px solid #ff6b6b;
-            border-radius: 30px 0 0 30px;
-            padding: 10px;
-            transition: border-color 0.3s;
-        }
+    .new-image {
+      width: 100px;
+      height: 100px;
+      margin: 20px 0;
+    }
 
-        input#url:focus {
-            border-color: #87CEEB;
-            outline: none;
-        }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
 
-        button.redirect-button {
-            height: 60px;
-            width: 60px;
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 0 30px 30px 0;
-            cursor: pointer;
-            padding: 0;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .prompt-box {
+      width: 300px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        button.redirect-button:hover {
-            background-color: #e55a5a;
-        }
+    .prompt-message {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #333;
+    }
 
-        .search-icon {
-            width: 30px;
-            height: 30px;
-        }
+    .prompt-input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
 
-        .new-image {
-            width: 100px;
-            height: 100px;
-            margin: 20px 0;
-        }
+    .prompt-button {
+      padding: 8px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
+    .prompt-button:hover {
+      background-color: #0056b3;
+    }
 
-        .prompt-box {
-            width: 300px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    .close-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: transparent;
+      color: #333;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+    }
 
-        .prompt-message {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
+    .close-button:hover {
+      color: #000;
+    }
 
-        .prompt-input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
+    footer {
+      text-align: center;
+      color: var(--footer-text);
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 1rem 0 0.25rem 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      background: var(--bg-color);
+      user-select: none;
+    }
 
-        .prompt-button {
-            padding: 8px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .footer-note {
+      font-family: Arial, sans-serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--text-color);
+      margin: 0 0 1rem 0;
+      user-select: none;
+    }
 
-        .prompt-button:hover {
-            background-color: #0056b3;
-        }
+    .settings-menu {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      z-index: 999;
+    }
 
-        .close-button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: transparent;
-            color: #333;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            z-index: 1;
-        }
+    .dropdown {
+      position: relative;
+      margin-left: 10px;
+    }
 
-        .close-button:hover {
-            color: #000;
-        }
+    .dropdown-btn {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
 
-        footer {
-            text-align: center;
-            color: #ff4c4c;
-            font-weight: bold;
-            font-size: 1.2rem;
-            padding: 1rem 0 0.25rem 0;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            background: #121212;
-            user-select: none;
-        }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--bg-color);
+      min-width: 120px;
+      border: 1px solid var(--accent-color);
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
 
-        .footer-note {
-            font-family: Arial, sans-serif;
-            font-style: italic;
-            font-size: 12px;
-            color: #fff;
-            margin: 0 0 1rem 0;
-            user-select: none;
-        }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
 
-        /* SETTINGS DROPDOWN */
-        .settings-wrapper {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-        }
+    .dropdown-content .submenu {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      display: none;
+      background-color: var(--bg-color);
+      min-width: 150px;
+      border: 1px solid var(--accent-color);
+      border-radius: 6px;
+    }
 
-        .settings-button {
-            background: #1e1e1e;
-            color: #ff6b6b;
-            border: 2px solid #ff6b6b;
-            padding: 10px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 18px;
-        }
+    .dropdown-content div:hover .submenu {
+      display: block;
+    }
 
-        .settings-dropdown {
-            position: relative;
-            display: inline-block;
-        }
+    .dropdown-content div {
+      padding: 10px;
+      color: var(--text-color);
+      cursor: pointer;
+      position: relative;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 45px;
-            right: 0;
-            background-color: #1e1e1e;
-            border: 2px solid #ff6b6b;
-            border-radius: 10px;
-            padding: 10px;
-            min-width: 120px;
-            z-index: 1000;
-        }
+    .dropdown-content div:hover {
+      background-color: var(--input-bg);
+    }
 
-        .settings-dropdown:hover .dropdown-content {
-            display: block;
-        }
+    .submenu div {
+      padding: 10px;
+    }
 
-        .theme-selector {
-            position: relative;
-            color: #ff6b6b;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .submenu div:hover {
+      background-color: var(--input-bg);
+    }
 
-        .theme-options {
-            position: absolute;
-            top: 0;
-            left: -130px;
-            display: flex;
-            flex-direction: column;
-            background-color: #1e1e1e;
-            border: 2px solid #ff6b6b;
-            border-radius: 8px;
-            padding: 10px;
-            z-index: 1001;
-        }
+    .submenu hr {
+      margin: 0;
+      border: none;
+      border-top: 1px solid var(--accent-color);
+    }
 
-        .theme-options button {
-            background-color: transparent;
-            border: none;
-            color: #ff6b6b;
-            cursor: pointer;
-            margin: 5px 0;
-            font-size: 14px;
-            text-align: left;
-        }
+    .dropdown-content,
+    .submenu {
+      pointer-events: none;
+    }
 
-        .theme-options button:hover {
-            color: #ffffff;
-        }
-
-        .settings-dropdown:hover .theme-options {
-            display: block;
-        }
-    </style>
+    .dropdown:hover .dropdown-content,
+    .dropdown-content div:hover .submenu {
+      pointer-events: auto;
+    }
+  </style>
 </head>
 <body>
-    <!-- Settings Menu -->
-    <div class="settings-wrapper">
-        <div class="settings-dropdown">
-            <button class="settings-button">⚙️</button>
-            <div class="dropdown-content">
-                <div class="theme-selector">
-                    Theme
-                    <div class="theme-options">
-                        <button onclick="setTheme('dark')">Dark</button>
-                        <button onclick="setTheme('light')">Light</button>
-                    </div>
-                </div>
-            </div>
+  <div class="settings-menu">
+    <div class="dropdown">
+      <button class="dropdown-btn">Settings</button>
+      <div class="dropdown-content">
+        <div>
+          Theme
+          <div class="submenu">
+            <div onclick="setTheme('dark')">Dark</div>
+            <hr />
+            <div onclick="setTheme('light')">Light</div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Main Content -->
-    <div class="container">
-        <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" />
-        <div class="text">Saffron</div>
-        <div class="input-container">
-            <input type="text" id="url" placeholder="Enter URL or Google Search" />
-            <button class="redirect-button" onclick="redirect()">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search Icon" />
-            </button>
-        </div>
+  <div class="container">
+    <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" class="new-image" alt="Saffron Logo" />
+    <div class="text">Saffron</div>
+    <div class="input-container">
+      <input type="text" id="url" placeholder="Enter URL or Google Search" />
+      <button class="redirect-button" onclick="redirect()">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search Icon" />
+      </button>
     </div>
+  </div>
 
-    <div class="overlay" id="overlay">
-        <div class="prompt-box">
-            <button class="close-button" onclick="closePrompt()">X</button>
-            <p class="prompt-message" id="prompt-message"></p>
-            <input type="text" class="prompt-input" id="prompt-input" />
-            <button class="prompt-button" onclick="submitPrompt()">OK</button>
-        </div>
+  <div class="overlay" id="overlay">
+    <div class="prompt-box">
+      <button class="close-button" onclick="closePrompt()">X</button>
+      <p class="prompt-message" id="prompt-message"></p>
+      <input type="text" class="prompt-input" id="prompt-input" />
+      <button class="prompt-button" onclick="submitPrompt()">OK</button>
     </div>
+  </div>
 
-    <footer>
-        Made by [SaffronA1]
-        <div class="footer-note">This was NOT made by Krounchdhar Konda</div>
-    </footer>
+  <footer>
+    Made by [SaffronA1]
+    <div class="footer-note">This was NOT made by Krounchdhar Konda</div>
+  </footer>
 
-    <script>
-        function redirect() {
-            var input = document.getElementById('url').value;
-            var url;
+  <script>
+    function redirect() {
+      var input = document.getElementById('url').value;
+      var url;
+      if (isValidURL(input)) {
+        url = input.startsWith('http') ? input : 'https://' + input;
+      } else {
+        url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
+      }
+      window.location.href = url;
+    }
 
-            if (isValidURL(input)) {
-                url = input.startsWith('http') ? input : 'https://' + input;
-            } else {
-                url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
-            }
+    function isValidURL(str) {
+      const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
+      return pattern.test(str);
+    }
 
-            window.location.href = url;
-        }
+    async function customPrompt(message, defaultValue) {
+      document.getElementById("prompt-message").innerText = message;
+      document.getElementById("prompt-input").value = defaultValue || "";
+      document.getElementById("overlay").style.display = "flex";
 
-        function isValidURL(str) {
-            const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
-            return pattern.test(str);
-        }
+      return new Promise(resolve => {
+        submitPrompt = function () {
+          var userInput = document.getElementById("prompt-input").value;
+          document.getElementById("overlay").style.display = "none";
+          resolve(userInput);
+          submitPrompt = null;
+        };
+      });
+    }
 
-        async function customPrompt(message, defaultValue) {
-            document.getElementById("prompt-message").innerText = message;
-            document.getElementById("prompt-input").value = defaultValue || "";
-            document.getElementById("overlay").style.display = "flex";
+    function closePrompt() {
+      document.getElementById("overlay").style.display = "none";
+    }
 
-            return new Promise(resolve => {
-                submitPrompt = function () {
-                    var userInput = document.getElementById("prompt-input").value;
-                    document.getElementById("overlay").style.display = "none";
-                    resolve(userInput);
-                    submitPrompt = null;
-                };
-            });
-        }
+    function setTheme(theme) {
+      if (theme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+    }
 
-        function closePrompt() {
-            document.getElementById("overlay").style.display = "none";
-        }
-
-        document.getElementById('url').addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                redirect();
-                document.getElementById('url').blur();
-            }
-        });
-
-        function setTheme(mode) {
-            if (mode === 'light') {
-                document.body.classList.add('white-theme');
-            } else {
-                document.body.classList.remove('white-theme');
-            }
-        }
-    </script>
+    document.getElementById('url').addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        redirect();
+        document.getElementById('url').blur();
+      }
+    });
+  </script>
 </body>
 </html>
