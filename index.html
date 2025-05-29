@@ -316,22 +316,29 @@
       return "";
     }
 
-    function redirect() {
-      var input = document.getElementById('url').value;
-      var url;
-      if (isValidURL(input)) {
-        url = input.startsWith('http') ? input : 'https://' + input;
+  function redirect() {
+    const input = document.getElementById('url').value.trim();
+    let url;
+
+    if (isValidURL(input)) {
+      url = input.startsWith('http') ? input : 'https://' + input;
+    } else {
+      const engine = localStorage.getItem('searchEngine') || 'google'; // default to Google
+      if (engine === 'bing') {
+        url = 'https://www.bing.com/search?q=' + encodeURIComponent(input);
       } else {
         url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
       }
-
-      // NEW: save to history
-      let history = JSON.parse(localStorage.getItem('saffronHistory') || '[]');
-      history.push(input);
-      localStorage.setItem('saffronHistory', JSON.stringify(history));
-
-      window.location.href = url;
     }
+
+  // Save to search history
+  let history = JSON.parse(localStorage.getItem('saffronHistory') || '[]');
+    history.push(input);
+    localStorage.setItem('saffronHistory', JSON.stringify(history));
+  
+    window.location.href = url;
+  }
+
 
     function isValidURL(str) {
       const pattern = /^(https?:\/\/)?([\w\d-]+\.)+[\w]{2,}(\/.*)?$/;
