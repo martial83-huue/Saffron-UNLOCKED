@@ -60,12 +60,14 @@
       display: block;
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
+      cursor: pointer;
     }
 
     input[type="checkbox"] {
       transform: scale(1.3);
       margin-right: 10px;
       accent-color: var(--accent-color);
+      cursor: pointer;
     }
 
     select {
@@ -98,8 +100,8 @@
 
   <div class="settings-container">
     <div class="setting-group">
-      <label><input type="checkbox" id="dark-theme"> Black Theme</label>
-      <label><input type="checkbox" id="light-theme"> White Theme</label>
+      <label><input type="checkbox" id="dark-theme-checkbox"> Black Theme</label>
+      <label><input type="checkbox" id="light-theme-checkbox"> White Theme</label>
     </div>
 
     <div class="setting-group">
@@ -114,36 +116,73 @@
   <footer>Made By [SaffronA1]</footer>
 
   <script>
-    // Load saved settings on page load
-    window.onload = function () {
-      const savedTheme = localStorage.getItem('theme');
-      const searchEngine = localStorage.getItem('searchEngine') || 'google';
+    // Cookie functions from index.html
+    function setCookie(name, value, days = 365) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
 
-      if (savedTheme === 'light') {
+    function getCookie(name) {
+      const cname = name + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(cname) === 0) {
+          return c.substring(cname.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function setTheme(theme) {
+      if (theme === 'light') {
         document.body.classList.add('light-theme');
-        document.getElementById('light-theme').checked = true;
       } else {
         document.body.classList.remove('light-theme');
-        document.getElementById('dark-theme').checked = true;
+      }
+      setCookie('theme', theme, 365);
+    }
+
+    // On page load, read cookie and set theme & checkbox state accordingly
+    window.onload = function () {
+      const savedTheme = getCookie('theme');
+
+      if (savedTheme === 'light') {
+        setTheme('light');
+        document.getElementById('light-theme-checkbox').checked = true;
+        document.getElementById('dark-theme-checkbox').checked = false;
+      } else {
+        setTheme('dark');
+        document.getElementById('dark-theme-checkbox').checked = true;
+        document.getElementById('light-theme-checkbox').checked = false;
       }
 
+      // Load search engine from localStorage (keep as-is)
+      const searchEngine = localStorage.getItem('searchEngine') || 'google';
       document.getElementById('browser-switch').value = searchEngine;
     };
 
-    // Theme switch logic
-    document.getElementById('dark-theme').addEventListener('change', function () {
+    // Event listeners for theme checkboxes (mutually exclusive)
+    document.getElementById('dark-theme-checkbox').addEventListener('change', function () {
       if (this.checked) {
-        document.getElementById('light-theme').checked = false;
-        localStorage.setItem('theme', 'dark');
-        document.body.classList.remove('light-theme');
+        document.getElementById('light-theme-checkbox').checked = false;
+        setTheme('dark');
+      } else {
+        // Prevent no theme selected - revert checkbox if unchecked
+        this.checked = true;
       }
     });
 
-    document.getElementById('light-theme').addEventListener('change', function () {
+    document.getElementById('light-theme-checkbox').addEventListener('change', function () {
       if (this.checked) {
-        document.getElementById('dark-theme').checked = false;
-        localStorage.setItem('theme', 'light');
-        document.body.classList.add('light-theme');
+        document.getElementById('dark-theme-checkbox').checked = false;
+        setTheme('light');
+      } else {
+        // Prevent no theme selected - revert checkbox if unchecked
+        this.checked = true;
       }
     });
 
