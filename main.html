@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saffron Password</title>
+    <title>Password Protected Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
@@ -88,16 +88,27 @@
     </div>
 
     <script>
+        const correctPasswordHash = '6b0680cdf0829199ecce109b18391e3b520619dc947afb5b25675cd48dc88362'; // Replace with the actual hash
+
         // Check if the user has already entered the correct password
         if (localStorage.getItem('passwordEntered') === 'true') {
             window.location.href = 'https://SaffronA1.github.io/Saffron/index.html';
         }
 
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            const correctPassword = 'gitgud123'; // Set the desired password
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
 
-            if (password === correctPassword) {
+        async function checkPassword() {
+            const password = document.getElementById('password').value;
+            const hashedPassword = await hashPassword(password);
+
+            if (hashedPassword === correctPasswordHash) {
                 localStorage.setItem('passwordEntered', 'true'); // Save to local storage
                 window.location.href = 'https://SaffronA1.github.io/Saffron/index.html';
             } else {
