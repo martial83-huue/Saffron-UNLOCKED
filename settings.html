@@ -98,29 +98,60 @@
 
   <div class="settings-container">
     <div class="setting-group">
-      <label><input type="checkbox" id="setting1"> Black Theme</label>
-      <label><input type="checkbox" id="setting2"> White Theme</label>
+      <label><input type="checkbox" id="dark-theme"> Black Theme</label>
+      <label><input type="checkbox" id="light-theme"> White Theme</label>
     </div>
 
     <div class="setting-group">
       <label for="browser-switch">Switch Browser:</label>
       <select id="browser-switch">
-        <option value="google" onclick="google()">Google</option>
-        <option value="bing" onclick="bing()">Bing</option>
+        <option value="google">Google</option>
+        <option value="bing">Bing</option>
       </select>
     </div>
   </div>
 
   <footer>Made By [SaffronA1]</footer>
+
   <script>
-    function google() {
-      localStorage.setItem('browserChoice', 'Google');
-    }
-    
-    function bing() {
-      localStorage.setItem('browserChoice', 'Bing');
-    }
+    // Load saved settings on page load
+    window.onload = function () {
+      const savedTheme = localStorage.getItem('theme');
+      const searchEngine = localStorage.getItem('searchEngine') || 'google';
+
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        document.getElementById('light-theme').checked = true;
+      } else {
+        document.body.classList.remove('light-theme');
+        document.getElementById('dark-theme').checked = true;
+      }
+
+      document.getElementById('browser-switch').value = searchEngine;
+    };
+
+    // Theme switch logic
+    document.getElementById('dark-theme').addEventListener('change', function () {
+      if (this.checked) {
+        document.getElementById('light-theme').checked = false;
+        localStorage.setItem('theme', 'dark');
+        document.body.classList.remove('light-theme');
+      }
+    });
+
+    document.getElementById('light-theme').addEventListener('change', function () {
+      if (this.checked) {
+        document.getElementById('dark-theme').checked = false;
+        localStorage.setItem('theme', 'light');
+        document.body.classList.add('light-theme');
+      }
+    });
+
+    // Browser select logic
+    document.getElementById('browser-switch').addEventListener('change', function () {
+      const choice = this.value;
+      localStorage.setItem('searchEngine', choice);
+    });
   </script>
 </body>
 </html>
-
