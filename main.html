@@ -91,7 +91,7 @@
         const correctPasswordHash = 'b66d84d3295f4dafb5cbb5d35522bca92d3ee8532e07104bf4c15c1914f8397d'; // Nothing that ritvik needs to now about cuz he is the only person who actually would read the code
 
         // Check if the user has already entered the correct password
-        if (localStorage.getItem('passwordEntered') === 'true') {
+        if (localStorage.getItem('passwordConfirmed') === 'true') {
             window.location.href = 'https://SaffronA1.github.io/Saffron/index.html';
         }
 
@@ -109,7 +109,7 @@
             const hashedPassword = await hashPassword(password);
 
             if (hashedPassword === correctPasswordHash) {
-                localStorage.setItem('passwordEntered', 'true'); // Save to local storage
+                localStorage.setItem('passowordConfirmed', 'true'); // Save to local storage
                 window.location.href = 'https://SaffronA1.github.io/Saffron/index.html';
             } else {
                 document.getElementById('message').innerText = 'Incorrect password, please try again.';
