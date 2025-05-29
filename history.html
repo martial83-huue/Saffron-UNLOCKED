@@ -1,80 +1,198 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saffron – Search History</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
     :root {
-      --red: #ff4444;
-      --white: #ffffff;
-      --black: #121212;
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --accent-color: #ff6b6b;
+      --input-bg: #1e1e1e;
+      --footer-text: #ff4c4c;
     }
-
-    [data-theme="dark"] {
-      --bg: var(--black);
-      --fg: var(--white);
+    .light-theme {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --input-bg: #f0f0f0;
+      --footer-text: #cc0000;
     }
-
-    [data-theme="light"] {
-      --bg: var(--white);
-      --fg: var(--black);
-    }
-
     body {
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Varela Round', sans-serif;
+      margin: 0;
       padding: 20px;
     }
-
     h1 {
-      color: var(--red);
+      color: var(--accent-color);
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 20px;
     }
-
     ul {
-      list-style: none;
+      list-style-type: none;
       padding: 0;
+      max-width: 800px;
+      margin: 0 auto;
     }
-
     li {
-      padding: 8px 0;
-      border-bottom: 1px solid var(--red);
+      background-color: var(--input-bg);
+      border: 1px solid var(--accent-color);
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+    }
+    .clear-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .clear-btn:hover {
+      background-color: #e55a5a;
+    }
+    .footer-note {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: var(--footer-text);
+    }
+    .settings-menu {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      z-index: 999;
+    }
+    .dropdown {
+      position: relative;
+      margin-left: 10px;
+    }
+    .dropdown-btn {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--bg-color);
+      min-width: 120px;
+      border: 1px solid var(--accent-color);
+      border-radius: 6px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown-content div {
+      padding: 10px;
+      color: var(--text-color);
+      cursor: pointer;
+    }
+    .dropdown-content div:hover {
+      background-color: var(--input-bg);
     }
   </style>
 </head>
 <body>
+  <div class="settings-menu">
+    <div class="dropdown">
+      <button class="dropdown-btn">Settings</button>
+      <div class="dropdown-content">
+        <div onclick="setTheme('dark')">Dark Theme</div>
+        <div onclick="setTheme('light')">Light Theme</div>
+      </div>
+    </div>
+  </div>
 
   <h1>Search History</h1>
-  <ul id="historyList"></ul>
+  <ul id="history-list"></ul>
+  <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+
+  <div class="footer-note">Made by [SaffronA1] – Updates: History Page</div>
 
   <script>
+    function setCookie(name, value, days = 365) {
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
     function getCookie(name) {
-      const value = "; " + document.cookie;
-      const parts = value.split("; " + name + "=");
-      if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
+      const cname = name + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(cname) === 0) {
+          return c.substring(cname.length, c.length);
+        }
+      }
       return "";
     }
 
-    const historyData = getCookie("history");
-    const list = document.getElementById("historyList");
-
-    if (historyData) {
-      const historyArray = JSON.parse(historyData);
-      historyArray.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        list.appendChild(li);
-      });
-    } else {
-      list.innerHTML = "<li>No history found.</li>";
+    function setTheme(theme) {
+      if (theme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+      setCookie('theme', theme, 365);
     }
 
-    // Apply saved theme
-    const savedTheme = getCookie("theme");
-    if (savedTheme) {
-      document.documentElement.setAttribute("data-theme", savedTheme);
+    function loadHistory() {
+      const history = JSON.parse(localStorage.getItem('saffronHistory') || '[]');
+      const list = document.getElementById('history-list');
+      list.innerHTML = "";
+
+      if (history.length === 0) {
+        const item = document.createElement('li');
+        item.textContent = "No history found.";
+        list.appendChild(item);
+        return;
+      }
+
+      history.slice().reverse().forEach(entry => {
+        const item = document.createElement('li');
+        item.textContent = entry;
+        list.appendChild(item);
+      });
+    }
+
+    function clearHistory() {
+      if (confirm("Are you sure you want to clear all search history?")) {
+        localStorage.removeItem('saffronHistory');
+        loadHistory();
+      }
+    }
+
+    window.onload = function () {
+      const savedTheme = getCookie('theme');
+      if (savedTheme === 'light') {
+        setTheme('light');
+      } else {
+        setTheme('dark');
+      }
+      loadHistory();
     }
   </script>
-
 </body>
 </html>
