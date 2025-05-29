@@ -109,7 +109,7 @@
             const hashedPassword = await hashPassword(password);
 
             if (hashedPassword === correctPasswordHash) {
-                localStorage.setItem('passowordConfirmed', 'true'); // Save to local storage
+                localStorage.setItem('passwordConfirmed', 'true'); // Save to local storage
                 window.location.href = 'https://SaffronA1.github.io/Saffron/index.html';
             } else {
                 document.getElementById('message').innerText = 'Incorrect password, please try again.';
