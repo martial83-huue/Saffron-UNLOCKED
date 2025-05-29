@@ -376,6 +376,16 @@
         document.getElementById('url').blur();
       }
     });
+
+    // Add this at the end of your existing <script> block
+
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && (event.key === 'h' || event.key === 'H')) {
+        event.preventDefault(); // prevent browser default history if any
+        window.location.href = 'https://SaffronA1.github.io/Saffron/history.html';
+      }
+    });
+
   </script>
 </body>
 </html>
