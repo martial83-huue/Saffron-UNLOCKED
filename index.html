@@ -262,6 +262,7 @@
           </div>
         </div>
         <div onclick="openHistory()" style="cursor: pointer;">History</div>
+        <div onclick="signOut()" style="cursor: pointer;">Sign out</div>
       </div>
     </div>
   </div>
@@ -392,6 +393,10 @@
       window.location.href = 'https://SaffronA1.github.io/Saffron/history.html';
     }
 
+    function signOut() {
+      localStorage.setItem('passwordEntered', 'false'); // Save to local storage
+      window.location.href = 'https://SaffronA1.github.io/Saffron/main.html'
+    }
   </script>
 </body>
 </html>
