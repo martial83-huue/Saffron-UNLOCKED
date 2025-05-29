@@ -105,8 +105,8 @@
     <div class="setting-group">
       <label for="browser-switch">Switch Browser:</label>
       <select id="browser-switch">
-        <option value="default">Google</option>
-        <option value="incognito">Bing</option>
+        <option value="google" onclick="google()">Google</option>
+        <option value="bing" onclick="bing()">Bing</option>
       </select>
     </div>
   </div>
@@ -114,7 +114,11 @@
   <footer>Made By [SaffronA1]</footer>
   <script>
     function google() {
-      
+      localStorage.setItem('browserChoice', 'Google');
+    }
+    
+    function bing() {
+      localStorage.setItem('browserChoice', 'Bing');
     }
   </script>
 </body>
