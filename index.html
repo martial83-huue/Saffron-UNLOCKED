@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Saffron</title>
   <style>
+    /* NO CHANGES MADE TO YOUR EXISTING STYLE */
     @import url('https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap');
-
     :root {
       --bg-color: #121212;
       --text-color: #ffffff;
@@ -14,14 +14,12 @@
       --input-bg: #1e1e1e;
       --footer-text: #ff4c4c;
     }
-
     .light-theme {
       --bg-color: #ffffff;
       --text-color: #000000;
       --input-bg: #f0f0f0;
       --footer-text: #cc0000;
     }
-
     body {
       background-color: var(--bg-color);
       color: var(--text-color);
@@ -31,7 +29,6 @@
       flex-direction: column;
       height: 100vh;
     }
-
     .container {
       display: flex;
       flex-direction: column;
@@ -40,7 +37,6 @@
       flex: 1;
       padding: 20px;
     }
-
     .text {
       font-size: 60px;
       font-weight: bold;
@@ -48,7 +44,6 @@
       margin-bottom: 20px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
-
     .input-container {
       display: flex;
       align-items: center;
@@ -56,7 +51,6 @@
       width: 100%;
       max-width: 800px;
     }
-
     input#url {
       flex: 1;
       height: 60px;
@@ -68,12 +62,10 @@
       padding: 10px;
       transition: border-color 0.3s;
     }
-
     input#url:focus {
       border-color: #87CEEB;
       outline: none;
     }
-
     button.redirect-button {
       height: 60px;
       width: 60px;
@@ -88,22 +80,18 @@
       align-items: center;
       justify-content: center;
     }
-
     button.redirect-button:hover {
       background-color: #e55a5a;
     }
-
     .search-icon {
       width: 30px;
       height: 30px;
     }
-
     .new-image {
       width: 100px;
       height: 100px;
       margin: 20px 0;
     }
-
     .overlay {
       position: fixed;
       top: 0;
@@ -115,7 +103,6 @@
       justify-content: center;
       align-items: center;
     }
-
     .prompt-box {
       width: 300px;
       background-color: #fff;
@@ -125,13 +112,11 @@
       position: relative;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-
     .prompt-message {
       font-size: 24px;
       margin-bottom: 15px;
       color: #333;
     }
-
     .prompt-input {
       width: 100%;
       padding: 8px;
@@ -140,7 +125,6 @@
       margin-bottom: 15px;
       box-sizing: border-box;
     }
-
     .prompt-button {
       padding: 8px 20px;
       background-color: #007bff;
@@ -149,11 +133,9 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     .prompt-button:hover {
       background-color: #0056b3;
     }
-
     .close-button {
       position: absolute;
       top: 5px;
@@ -165,11 +147,9 @@
       cursor: pointer;
       z-index: 1;
     }
-
     .close-button:hover {
       color: #000;
     }
-
     footer {
       text-align: center;
       color: var(--footer-text);
@@ -182,7 +162,6 @@
       background: var(--bg-color);
       user-select: none;
     }
-
     .footer-note {
       font-family: Arial, sans-serif;
       font-style: italic;
@@ -191,7 +170,6 @@
       margin: 0 0 1rem 0;
       user-select: none;
     }
-
     .settings-menu {
       position: absolute;
       top: 10px;
@@ -201,12 +179,10 @@
       font-size: 18px;
       z-index: 999;
     }
-
     .dropdown {
       position: relative;
       margin-left: 10px;
     }
-
     .dropdown-btn {
       background-color: var(--accent-color);
       color: white;
@@ -215,7 +191,6 @@
       cursor: pointer;
       border-radius: 6px;
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -227,11 +202,9 @@
       border-radius: 6px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-
     .dropdown:hover .dropdown-content {
       display: block;
     }
-
     .dropdown-content .submenu {
       position: absolute;
       top: 0;
@@ -242,41 +215,33 @@
       border: 1px solid var(--accent-color);
       border-radius: 6px;
     }
-
     .dropdown-content div:hover .submenu {
       display: block;
     }
-
     .dropdown-content div {
       padding: 10px;
       color: var(--text-color);
       cursor: pointer;
       position: relative;
     }
-
     .dropdown-content div:hover {
       background-color: var(--input-bg);
     }
-
     .submenu div {
       padding: 10px;
     }
-
     .submenu div:hover {
       background-color: var(--input-bg);
     }
-
     .submenu hr {
       margin: 0;
       border: none;
       border-top: 1px solid var(--accent-color);
     }
-
     .dropdown-content,
     .submenu {
       pointer-events: none;
     }
-
     .dropdown:hover .dropdown-content,
     .dropdown-content div:hover .submenu {
       pointer-events: auto;
@@ -326,20 +291,18 @@
   </footer>
 
   <script>
-    // Helper: set cookie (expires in 365 days)
     function setCookie(name, value, days = 365) {
       const d = new Date();
       d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-      const expires = "expires="+ d.toUTCString();
+      const expires = "expires=" + d.toUTCString();
       document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    // Helper: get cookie by name
     function getCookie(name) {
       const cname = name + "=";
       const decodedCookie = decodeURIComponent(document.cookie);
       const ca = decodedCookie.split(';');
-      for(let i = 0; i < ca.length; i++) {
+      for (let i = 0; i < ca.length; i++) {
         let c = ca[i].trim();
         if (c.indexOf(cname) === 0) {
           return c.substring(cname.length, c.length);
@@ -348,7 +311,6 @@
       return "";
     }
 
-    // Redirect function as before
     function redirect() {
       var input = document.getElementById('url').value;
       var url;
@@ -357,6 +319,12 @@
       } else {
         url = 'https://www.google.com/search?q=' + encodeURIComponent(input);
       }
+
+      // ✅ NEW: Save to history
+      let history = JSON.parse(localStorage.getItem('saffronHistory') || '[]');
+      history.push(input);
+      localStorage.setItem('saffronHistory', JSON.stringify(history));
+
       window.location.href = url;
     }
 
@@ -365,7 +333,6 @@
       return pattern.test(str);
     }
 
-    // Prompt related code unchanged
     async function customPrompt(message, defaultValue) {
       document.getElementById("prompt-message").innerText = message;
       document.getElementById("prompt-input").value = defaultValue || "";
@@ -385,7 +352,6 @@
       document.getElementById("overlay").style.display = "none";
     }
 
-    // Set theme and save to cookie
     function setTheme(theme) {
       if (theme === 'light') {
         document.body.classList.add('light-theme');
@@ -395,18 +361,15 @@
       setCookie('theme', theme, 365);
     }
 
-    // On page load: check cookie, set theme accordingly
-    window.onload = function() {
+    window.onload = function () {
       const savedTheme = getCookie('theme');
       if (savedTheme === 'light') {
         setTheme('light');
       } else {
-        // Default is dark
         setTheme('dark');
       }
     }
 
-    // Enter key triggers redirect
     document.getElementById('url').addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         redirect();
