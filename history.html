@@ -155,15 +155,45 @@
   </style>
 </head>
 <body>
-  <div class="settings-menu">
-    <div class="dropdown">
-      <button class="dropdown-btn">Settings</button>
-      <div class="dropdown-content">
-        <div onclick="setTheme('dark')">Dark Theme</div>
-        <div onclick="setTheme('light')">Light Theme</div>
-      </div>
-    </div>
-  </div>
+<!-- Home Button with Red Outline -->
+<style>
+  .home-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  .home-button img {
+    width: 32px;
+    height: 32px;
+    user-select: none;
+    border: 2px solid var(--accent-color); /* red outline using your theme */
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: transparent;
+  }
+
+  .home-button img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 6px var(--accent-color);
+  }
+</style>
+
+<div class="home-button" onclick="goHome()" title="Go to Home">
+  <img src="https://avatars.githubusercontent.com/u/184554194?s=400&u=0e728e017e9c60e0cdaaf7bfcb1cea4216d02781&v=4" alt="Saffron Logo" />
+</div>
+
+<script>
+  function goHome() {
+    window.location.href = "https://SaffronA1.github.io/Saffron/main.html";
+  }
+</script>
+
+
+
+
 
   <h1>Search History</h1>
   <ul id="history-list"></ul>
