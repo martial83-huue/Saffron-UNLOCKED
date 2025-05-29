@@ -97,32 +97,29 @@
 </head>
 <body>
   <header>Settings</header>
-  <!-- Home Button (Place this inside <body> at top left) -->
+<!-- Home Button with Red Outline -->
 <style>
   .home-button {
     position: fixed;
     top: 10px;
     left: 10px;
-    background-color: var(--accent-color);
-    border-radius: 8px;
-    padding: 6px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transition: background-color 0.3s;
     z-index: 1000;
   }
-  .home-button:hover {
-    background-color: #e55a5a;
-  }
+
   .home-button img {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     user-select: none;
+    border: 2px solid var(--accent-color); /* red outline using your theme */
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: transparent;
+  }
+
+  .home-button img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 6px var(--accent-color);
   }
 </style>
 
@@ -132,9 +129,10 @@
 
 <script>
   function goHome() {
-    window.location.href = "https://SaffronA1.github.io/Saffron/index.html";
+    window.location.href = "https://SaffronA1.github.io/Saffron/main.html";
   }
 </script>
+
 
   <div class="settings-container">
     <div class="setting-group">
