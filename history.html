@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>History</title>
+  <style>
+    :root {
+      --red: #ff4444;
+      --white: #ffffff;
+      --black: #121212;
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--black);
+      --fg: var(--white);
+    }
+
+    [data-theme="light"] {
+      --bg: var(--white);
+      --fg: var(--black);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: var(--red);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--red);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Search History</h1>
+  <ul id="historyList"></ul>
+
+  <script>
+    function getCookie(name) {
+      const value = "; " + document.cookie;
+      const parts = value.split("; " + name + "=");
+      if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
+      return "";
+    }
+
+    const historyData = getCookie("history");
+    const list = document.getElementById("historyList");
+
+    if (historyData) {
+      const historyArray = JSON.parse(historyData);
+      historyArray.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+    } else {
+      list.innerHTML = "<li>No history found.</li>";
+    }
+
+    // Apply saved theme
+    const savedTheme = getCookie("theme");
+    if (savedTheme) {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  </script>
+
+</body>
+</html>
