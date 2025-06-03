@@ -1,4 +1,4 @@
-# Saffron
+# Saffron-UNLOCKED
 ## A simple browser page that could be pasted on any html script code like Lego Wedo 2.0
 # THIS REPOSITORY UNLOCKS SAFFRON SO THAT YOU DO NOT NEED THE PASSWORD!
 ```
