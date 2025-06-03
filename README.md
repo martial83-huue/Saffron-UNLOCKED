@@ -10,4 +10,6 @@ Credits: Blobby-Boi (Creator of Blobbypass), SaffronA1, MartialMeteor82, ChatGPT
 
 # How It Works
 
-### Exploits the fact that there is no real encryption or protection of the index.html (Saffron's search dashboard) - main.html (password page) acts as just a doorway to index.html but __is easily skipped__ by changing URL in main.js from main.html to index.html - results in easy cracking and poor encryption
+### Exploits the fact that there is no real encryption or protection of the index.html (Saffron's search dashboard) - main.html (password page) acts as just a doorway to index.html but <ins>is easily skipped</ins> by changing URL in main.js from main.html to index.html 
+
+### Results in easy cracking and poor encryption
