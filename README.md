@@ -6,7 +6,7 @@
 ```
 
 
-Credits: Blobby-Boi (Creator of Blobbypass), SaffronA1, MartialMeteor82, ChatGPT-4o, BlackBoxAI, Canva, and GitHub.
+Credits: Blobby-Boi (Creator of Blobbypass), SaffronA1, ChatGPT-4o, BlackBoxAI, Canva, and GitHub.
 
 # How It Works
 
